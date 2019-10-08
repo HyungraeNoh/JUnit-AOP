@@ -1,9 +1,12 @@
 package kr.gudi.gdj16.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.gudi.gdj16.service.DBServiceInterface;
 
@@ -18,7 +21,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
+	public ModelAndView home(HttpServletRequest req, ModelAndView mav) {
 //		System.out.println("HomeController.home() : Start");
 		
 		int cnt = 0;
@@ -27,9 +30,9 @@ public class HomeController {
 //			System.out.println("SIZE : " + cnt);
 			cnt++;
 		}
-		
+		mav.setViewName("home");
 //		System.out.println("HomeController.home() : End");
-		return "home";
+		return mav;
 	}
 	
 }

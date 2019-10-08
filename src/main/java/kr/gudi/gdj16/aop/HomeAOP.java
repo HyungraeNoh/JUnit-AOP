@@ -12,6 +12,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.gudi.gdj16.dao.DBDaoInterface;
 
@@ -77,6 +78,9 @@ public class HomeAOP {
      * 
 	 ****************************************************************************/
 	
+	@Autowired
+	AopUtil au;
+	
 	@Pointcut("within(kr.gudi.gdj16.controller.HomeController)")
 	public void pointcut() {}
 	
@@ -91,34 +95,14 @@ public class HomeAOP {
 	@After("pointcut()")
 	public void after(JoinPoint jp) {
 		end = System.currentTimeMillis();
-		System.out.println(start);
-		System.out.println(end);
 		System.out.println(jp.getSignature().toShortString() + " : " + ((end - start) / 1000.0));
 		System.out.println(jp.getSignature().toShortString() + " : End!");
-
 	}
 	
 	@Around("pointcut()")
-	public String around(ProceedingJoinPoint jp) throws Throwable {
+	public ModelAndView around(ProceedingJoinPoint jp) throws Throwable {
 		System.out.println("AOP!!");
-		
-		Object[] obj = jp.getArgs();
-		System.out.println("Param Size : "+ obj.length);
-		for(int i=0; i <obj.length; i++) {
-			if(obj[i] instanceof HttpServletRequest) {
-				System.out.println("HttpServletRequest 있음");
-				HttpServletRequest req = (HttpServletRequest) obj[i];
-				Enumeration<?> enu = req.getParameterNames();
-				while(enu.hasMoreElements()) {
-					String name = enu.nextElement().toString();
-					System.out.println(name);
-					System.out.println(req.getParameter(name));
-				}
-			} else {
-				System.out.println("다른 객체가 넘어왔다.");
-			}
-		}
-		return jp.proceed().toString();
+		return au.checkParams(jp);
 	}
 	
 }
