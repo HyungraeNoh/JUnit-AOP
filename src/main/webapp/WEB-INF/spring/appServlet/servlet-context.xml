@@ -28,5 +28,6 @@
 	<aop:aspectj-autoproxy />
 	<beans:bean id="homeAOP" class="kr.gudi.gdj16.aop.HomeAOP" />
 	<beans:bean id="homeAOP2" class="kr.gudi.gdj16.aop.HomeAOP2" />
+	<beans:bean id="homeAOP3" class="kr.gudi.gdj16.aop.HomeAOP3" />
 	
 </beans:beans>

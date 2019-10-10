@@ -18,9 +18,9 @@ public class AopUtil {
 		for(int i = 0; i < obj.length; i++) {
 			Object object = obj[i]; 
 			if(object instanceof HttpServletRequest) {
-				if(checkRequest(object)) { 
+				if(checkRequest(object)) {
 					mav.setViewName("aop");
-					return mav;
+					return mav; 
 				}
 			} else {
 				System.out.println("다른 객체가 넘어왔다.");
