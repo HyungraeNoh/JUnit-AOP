@@ -27,5 +27,6 @@
 	<context:component-scan base-package="kr.gudi.gdj16" />
 	<aop:aspectj-autoproxy />
 	<beans:bean id="homeAOP" class="kr.gudi.gdj16.aop.HomeAOP" />
+	<beans:bean id="homeAOP2" class="kr.gudi.gdj16.aop.HomeAOP2" />
 	
 </beans:beans>
